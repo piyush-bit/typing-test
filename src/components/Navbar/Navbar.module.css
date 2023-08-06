@@ -1,0 +1,31 @@
+
+.container{
+    position: sticky;
+    top: 0;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding: 0 120px;
+    justify-content: space-evenly;
+    /* z-index: 1; */
+    background-color: white;
+}
+.logo{
+    height: 33px;
+}
+.menu{
+    display: flex;
+    gap: 30px;
+}
+.settings{
+    display: flex;
+    align-items: center;
+    
+    width: 128px;
+    height: 38px;
+    background-color: #ee0007;
+}
+.settings>p{
+    margin: auto;
+    color: white;
+}

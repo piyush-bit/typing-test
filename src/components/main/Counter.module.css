@@ -1,0 +1,17 @@
+.content{
+    height: 96px;
+    width: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 800;
+    background-color: white;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+.container{
+    
+    text-align: center;
+    
+}
