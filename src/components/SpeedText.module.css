@@ -1,12 +1,12 @@
 
 .container{
     display: flex;
-    padding: 40px 0;
+    padding: auto 0;
 
 
 }
 
-span{
+.container span{
     font-size: 2rem;
 }
 .done,.comming{

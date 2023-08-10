@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styles from './SpeedText.module.css'
 
-function App() {
+function App(props) {
 
     const text = "DevSecOps is an augmentation of DevOps to allow for security practices to be integrated into the DevOps approach. Contrary to a traditional centralized security team model, each delivery team is empowered to factor in the correct security controls into their software delivery. Security practices and testing are performed earlier in the development lifecycle, hence the term \"shift left\". Security is tested in three main areas: static, software composition, and dynamic."
         .split(' ');
@@ -12,6 +12,14 @@ function App() {
 
     const ref = useRef(null);
 
+    useEffect(()=>{
+        setIndex(0);
+        setComming(text);
+        setDone([]);
+        setCorrect([true]);
+        ref.current.textContent='';
+    },[props.reset])
+
     useEffect(() => {
         setComming([...text.slice(index)]);
     }, [index])
@@ -20,6 +28,7 @@ function App() {
     const FocusChild = () => { ref.current.focus() };
 
     const onKeyDownHandler = function (event) {
+        if(props.started||props.setStarted(true));
         if (event.key === 'Enter') {
             event.preventDefault();
         }
@@ -38,6 +47,15 @@ function App() {
             const trimmedInput = input.trim();
             setCorrect(prev => { return [...(prev.slice(0, -1)), trimmedInput === word, true] });
             setDone((prev) => [...(prev.slice(0, -1)), input, '']);
+            
+            if(trimmedInput === word){
+                props.setwpm(prev=>prev+1);
+                props.setcpm(prev=>{return prev+word.length});
+                props.setAccuracy(prev=>{return Math.round(((prev*index/100)+1)*100/(index+1))});
+            }
+            else{
+                props.setAccuracy(prev=>{return Math.round(((prev*index/100)+0)*100/(index+1))})
+            }
             setIndex((prev) => prev + 1);
             e.target.textContent = '';
         }

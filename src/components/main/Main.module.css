@@ -23,7 +23,7 @@
 .counter{
     display: flex;
     gap: 30px;
-    margin-left: 50px;
+    margin-left: 100px;
 }
 .speed{
     display: flex;

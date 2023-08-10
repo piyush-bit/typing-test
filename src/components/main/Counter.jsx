@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './Counter.module.css'
-function Counter() {
+function Counter(props) {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <p>0</p>
+        <p>{props.value}</p>
       </div>
-      <p>char</p>
+      <p>{props.name}</p>
     </div>
   )
 }
