@@ -9,26 +9,36 @@ function App(props) {
     const [comming, setComming] = useState(text);
     const [done, setDone] = useState([]);
     const [correct, setCorrect] = useState([true]);
+    const startTimeRef = useRef(null);
+    const [speed, setSpeed] = useState([]);
+
 
     const ref = useRef(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         setIndex(0);
         setComming(text);
         setDone([]);
         setCorrect([true]);
-        ref.current.textContent='';
-    },[props.reset])
+        startTimeRef.current=null;
+        setSpeed([]);
+        ref.current.textContent = '';
+    }, [props.reset])
 
     useEffect(() => {
         setComming([...text.slice(index)]);
+        startTimeRef.current=new Date().getTime();
     }, [index])
 
 
     const FocusChild = () => { ref.current.focus() };
 
     const onKeyDownHandler = function (event) {
-        if(props.started||props.setStarted(true));
+        console.log(props.started);
+        if (!props.started ) {
+            props.setStarted(true);
+            startTimeRef.current = new Date().getTime();
+        }
         if (event.key === 'Enter') {
             event.preventDefault();
         }
@@ -47,19 +57,33 @@ function App(props) {
             const trimmedInput = input.trim();
             setCorrect(prev => { return [...(prev.slice(0, -1)), trimmedInput === word, true] });
             setDone((prev) => [...(prev.slice(0, -1)), input, '']);
-            
-            if(trimmedInput === word){
-                props.setwpm(prev=>prev+1);
-                props.setcpm(prev=>{return prev+word.length});
-                props.setAccuracy(prev=>{return Math.round(((prev*index/100)+1)*100/(index+1))});
+            if (trimmedInput === word) {
+                props.setwpm(prev => prev + 1);
+                props.setcpm(prev => { return prev + word.length });
+                props.setAccuracy(prev => { return Math.round(((prev * index / 100) + 1) * 100 / (index + 1)) });
             }
-            else{
-                props.setAccuracy(prev=>{return Math.round(((prev*index/100)+0)*100/(index+1))})
+            else {
+                props.setAccuracy(prev => { return Math.round(((prev * index / 100) + 0) * 100 / (index + 1)) })
             }
             setIndex((prev) => prev + 1);
             e.target.textContent = '';
+
+            setSpeed(prev => {
+                const currentTime = new Date().getTime();
+                console.log("current "+currentTime);
+                const startTime = startTimeRef.current;
+                console.log("start Time "+startTime);
+                console.log("diff"+ (currentTime-startTime)/1000);
+
+                 // Use start time if available
+                const calculatedSpeed = 60000 / (currentTime - startTime);
+                return [...prev, Math.round(calculatedSpeed)];
+            });
+            
+
         }
         else {
+            console.log(startTimeRef);
             let i = 0;
             while (i < input.length && i < word.length) {
                 if (input[i] === word[i]) {
@@ -99,7 +123,13 @@ function App(props) {
     return (
         <div className={styles.container} onClick={FocusChild}>
             <div className={styles.done}>
-                {done.map((element, index) => { return <span className={classgenrator(correct[index])} key={index}>{element}</span> })}
+                {done.map((element, index) => {
+                    return <div key={index} className={styles.donecotnainer}>
+                        <span className={classgenrator(correct[index])} >{element}</span>
+                        <div className={styles.speed}>{speed[index]}</div>
+                    </div>
+
+                })}
                 <div className={styles.cursor} ref={ref} onKeyDown={onKeyDownHandler} onInput={onChangeHandler} contentEditable="true"></div>
             </div>
 

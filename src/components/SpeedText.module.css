@@ -1,8 +1,9 @@
 
 .container{
     display: flex;
-    padding: auto 0;
-
+    margin: auto 0;
+    /* height: 100%; */
+    /* align-items: center; */
 
 }
 
@@ -13,7 +14,7 @@
     width: 50%;
     display: flex;
     gap: 1rem;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
     user-select: none;
 }
@@ -40,4 +41,13 @@
 
 .wrong{
     text-decoration: line-through;
+}
+.donecontainer{
+    position: relative;
+}
+
+.speed{
+    position: absolute;
+    top: 0px;
+    font-size: 8px;
 }
