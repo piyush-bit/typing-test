@@ -10,20 +10,20 @@ function App(props) {
     const [done, setDone] = useState([]);
     const [correct, setCorrect] = useState([true]);
     const startTimeRef = useRef(null);
+    const lastChar = useRef(null);
     const [speed, setSpeed] = useState([]);
-
-
+    const [charSpeed, setCharSpeed] = useState({});
     const ref = useRef(null);
 
-    useEffect(() => {
-        setIndex(0);
-        setComming(text);
-        setDone([]);
-        setCorrect([true]);
-        startTimeRef.current=null;
-        setSpeed([]);
-        ref.current.textContent = '';
-    }, [props.reset])
+    // useEffect(() => {
+    //     setIndex(0);
+    //     setComming(text);
+    //     setDone([]);
+    //     setCorrect([true]);
+    //     startTimeRef.current=null;
+    //     setSpeed([]);
+    //     ref.current.textContent = '';
+    // }, [props.reset])
 
     useEffect(() => {
         setComming([...text.slice(index)]);
@@ -38,9 +38,11 @@ function App(props) {
         if (!props.started ) {
             props.setStarted(true);
             startTimeRef.current = new Date().getTime();
+            lastChar.current = new Date().getTime();
+
         }
         if (event.key === 'Enter') {
-            event.preventDefault();
+            event.preventDefault(); 
         }
     };
 

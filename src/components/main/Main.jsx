@@ -51,7 +51,7 @@ function Main() {
             </div>
         </div>
         <div className={styles.speed}>
-          <SpeedText setAccuracy={setAccuracy} setcpm={setcpm} setwpm={setwpm} started={started} setStarted={setStarted} reset={reset}/>
+          <SpeedText key={reset} setAccuracy={setAccuracy} setcpm={setcpm} setwpm={setwpm} started={started} setStarted={setStarted} reset={reset}/>
         </div>
         <ScoreCard cpm={cpm} wpm={wpm} accuracy={accuracy} setReset={setReset} timer={timer}/>
         
