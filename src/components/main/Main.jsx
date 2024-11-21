@@ -8,10 +8,11 @@ import styles from './Main.module.css'
 
 function Main() {
 
+  const [testTime,setTestTime] = useState(60);
   const [wpm, setwpm]=useState(0);
   const [cpm,setcpm]=useState(0);
   const [accuracy,setAccuracy]=useState(0);
-  const [timer,setTimer] = useState(60);
+  const [timer,setTimer] = useState(testTime);
   const [started,setStarted]=useState(false);
   const [reset,setReset] = useState(0);
 
@@ -20,10 +21,10 @@ function Main() {
     setwpm(0);
     setcpm(0);
     setAccuracy(0);
-    setTimer(60);
+    setTimer(testTime);
     setStarted(false);
         
-  },[reset]);
+  },[reset,testTime]);
   
   useEffect(() => {
     let interval;
@@ -36,6 +37,19 @@ function Main() {
 
     return () => clearInterval(interval);
   }, [timer,started]);
+
+  function changeTimerTime(direction){
+    if(direction){
+      if(!(testTime>=60)){
+        setTestTime(testTime+15);
+      }
+    }else{
+      if(!(testTime<=15)){
+        setTestTime(testTime-15);
+      }
+
+    }
+  }
   
   return (
     <>
@@ -43,17 +57,17 @@ function Main() {
         <p>TYPING SPEED TEST </p>
         <h2>Test your typing skills</h2>
         <div className={styles.stats}>
-            <Timer value={timer}/>
+            <Timer value={timer} started={started} increment={()=>{changeTimerTime(true)}} decrement={()=>{changeTimerTime(false)}}/>
             <div className={styles.counter}>
-            <Counter value={wpm} name={"words/min"}/>
-            <Counter value={cpm} name={"chars/min"}/>
+            <Counter value={testTime==timer?0:Math.round(wpm*60/(testTime-timer))} name={"words/min"}/>
+            <Counter value={testTime==timer?0:Math.round(cpm*60/(testTime-timer))} name={"chars/min"}/>
             <Counter value={accuracy} name={"% accuracy"}/>
             </div>
         </div>
         <div className={styles.speed}>
           <SpeedText key={reset} setAccuracy={setAccuracy} setcpm={setcpm} setwpm={setwpm} started={started} setStarted={setStarted} reset={reset}/>
         </div>
-        <ScoreCard cpm={cpm} wpm={wpm} accuracy={accuracy} setReset={setReset} timer={timer}/>
+        <ScoreCard cpm={testTime==timer?0:Math.round(cpm*60/(testTime-timer))} wpm={testTime==timer?0:Math.round(wpm*60/(testTime-timer))} accuracy={accuracy} setReset={setReset} timer={timer}/>
         
     </div>
     </>

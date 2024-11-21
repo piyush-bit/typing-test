@@ -36,3 +36,9 @@
     box-shadow: -1px 0px 29px -12px rgba(0,0,0,0.75);
     overflow: hidden;
 }
+
+.header{
+    padding: 24px 5%;
+    display: flex;
+    justify-content: space-between;
+}

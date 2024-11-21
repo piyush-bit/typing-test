@@ -5,7 +5,6 @@ function NavMenu(props) {
   return (
     <div className={styles.container}>
         <p>{props.name}</p>
-        <img src="https://cdn-icons-png.flaticon.com/64/60/60995.png" alt="" />
     </div>
   )
 }

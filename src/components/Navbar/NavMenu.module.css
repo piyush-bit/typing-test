@@ -2,8 +2,5 @@
     display: flex;
     align-items: center;
     gap: 6px;
-}
-.container > img{
-    width: 5px;
-    height: 5px;
+    cursor: pointer;
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styles from './SpeedText.module.css'
+import {article} from 'txtgen'
 
 function App(props) {
 
-    const text = "DevSecOps is an augmentation of DevOps to allow for security practices to be integrated into the DevOps approach. Contrary to a traditional centralized security team model, each delivery team is empowered to factor in the correct security controls into their software delivery. Security practices and testing are performed earlier in the development lifecycle, hence the term \"shift left\". Security is tested in three main areas: static, software composition, and dynamic."
-        .split(' ');
+    const [text , setText] = useState((article())
+    .split(' '))
     const [index, setIndex] = useState(0);
     const [comming, setComming] = useState(text);
     const [done, setDone] = useState([]);
@@ -15,15 +16,6 @@ function App(props) {
     const [charSpeed, setCharSpeed] = useState({});
     const ref = useRef(null);
 
-    // useEffect(() => {
-    //     setIndex(0);
-    //     setComming(text);
-    //     setDone([]);
-    //     setCorrect([true]);
-    //     startTimeRef.current=null;
-    //     setSpeed([]);
-    //     ref.current.textContent = '';
-    // }, [props.reset])
 
     useEffect(() => {
         setComming([...text.slice(index)]);
