@@ -6,16 +6,23 @@
     align-items: center;
     gap: 4px;
     border-radius: 50%;
-    background-color: white;
+    background-color: white; 
+}
+
+.container>div{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .score{
     font-weight: 800;
     margin-left: auto;
     margin-right: auto;
-    font-size: 48px;
+    font-size: 40px;
 }
 .unit{
+    font-size: 12px;
     margin-left: auto;
     margin-right: auto;
     margin-top: -20px;

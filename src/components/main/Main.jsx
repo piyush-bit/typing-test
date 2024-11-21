@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
-import Timer from './timer'
-import Counter from './counter'
+import Timer from './Timer'
+import Counter from './Counter'
 import SpeedText from '../SpeedText'
 import ScoreCard from './ScoreCard'
 import styles from './Main.module.css'
