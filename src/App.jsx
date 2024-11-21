@@ -2,16 +2,21 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Main from './components/main/Main.jsx'
 import './App.css'
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import BG from './components/BG/BG.jsx'
+import ScriptureResultCard from './components/BG/ResultCard.jsx'
 function App() {
 
     
     return (
-        <>
-        <Navbar/>
-        <Main/>
-       
-        </>
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/bg" element={<BG />} />
+                <Route path="/test" element={<ScriptureResultCard/>} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 

@@ -9,12 +9,6 @@
     background-color: white; 
 }
 
-.container>div{
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
 .score{
     font-weight: 800;
     margin-left: auto;
@@ -33,4 +27,9 @@
     font-size: 16px;
     cursor: pointer;
 
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }

@@ -4,6 +4,7 @@ import Counter from './Counter'
 import SpeedText from '../SpeedText'
 import ScoreCard from './ScoreCard'
 import styles from './Main.module.css'
+import { article } from 'txtgen'
 
 
 function Main() {
@@ -65,7 +66,7 @@ function Main() {
             </div>
         </div>
         <div className={styles.speed}>
-          <SpeedText key={reset} setAccuracy={setAccuracy} setcpm={setcpm} setwpm={setwpm} started={started} setStarted={setStarted} reset={reset}/>
+          <SpeedText key={reset} setAccuracy={setAccuracy} setcpm={setcpm} setwpm={setwpm} started={started} setStarted={setStarted} reset={reset} text={article().split(" ")}/>
         </div>
         <ScoreCard cpm={testTime==timer?0:Math.round(cpm*60/(testTime-timer))} wpm={testTime==timer?0:Math.round(wpm*60/(testTime-timer))} accuracy={accuracy} setReset={setReset} timer={timer}/>
         

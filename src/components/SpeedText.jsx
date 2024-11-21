@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styles from './SpeedText.module.css'
-import {article} from 'txtgen'
 
-function App(props) {
-
-    const [text , setText] = useState((article())
-    .split(' '))
+function SpeedText(props) {
+    // console.log(props.text);
+    
+    const [text, setText] = useState(props.text);
     const [index, setIndex] = useState(0);
     const [comming, setComming] = useState(text);
     const [done, setDone] = useState([]);
@@ -20,13 +19,21 @@ function App(props) {
     useEffect(() => {
         setComming([...text.slice(index)]);
         startTimeRef.current=new Date().getTime();
+        if(index==text.length){
+            props.setEnd(true);
+            props.setStarted(false);
+            console.log("end");
+            
+        }
+        console.log(index);
+        
+        
     }, [index])
 
 
     const FocusChild = () => { ref.current.focus() };
 
     const onKeyDownHandler = function (event) {
-        console.log(props.started);
         if (!props.started ) {
             props.setStarted(true);
             startTimeRef.current = new Date().getTime();
@@ -49,6 +56,8 @@ function App(props) {
         }
         else if (/\s$/.test(input)) {
             const trimmedInput = input.trim();
+            console.log("over");
+            
             setCorrect(prev => { return [...(prev.slice(0, -1)), trimmedInput === word, true] });
             setDone((prev) => [...(prev.slice(0, -1)), input, '']);
             if (trimmedInput === word) {
@@ -64,20 +73,20 @@ function App(props) {
 
             setSpeed(prev => {
                 const currentTime = new Date().getTime();
-                console.log("current "+currentTime);
+                // console.log("current "+currentTime);
                 const startTime = startTimeRef.current;
-                console.log("start Time "+startTime);
-                console.log("diff"+ (currentTime-startTime)/1000);
+                // console.log("start Time "+startTime);
+                // console.log("diff"+ (currentTime-startTime)/1000);
 
                  // Use start time if available
                 const calculatedSpeed = 60000 / (currentTime - startTime);
                 return [...prev, Math.round(calculatedSpeed)];
             });
-            
+
 
         }
         else {
-            console.log(startTimeRef);
+            // console.log(startTimeRef);
             let i = 0;
             while (i < input.length && i < word.length) {
                 if (input[i] === word[i]) {
@@ -112,8 +121,6 @@ function App(props) {
             default: return styles.default;
         }
     }
-
-
     return (
         <div className={styles.container} onClick={FocusChild}>
             <div className={styles.done}>
@@ -126,10 +133,9 @@ function App(props) {
                 })}
                 <div className={styles.cursor} ref={ref} onKeyDown={onKeyDownHandler} onInput={onChangeHandler} contentEditable="true"></div>
             </div>
-
             <div className={styles.comming}>{comming.map((element, index) => { return <span key={index}>{element}</span> })}</div>
         </div>
     )
 }
 
-export default App
+export default SpeedText
