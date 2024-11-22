@@ -127,7 +127,7 @@ function BG() {
                     />
                 )}
             </div>
-            {end && createPortal(<ScriptureResultCard wpm={timer === 0 ? 0 : Math.round((wpm * 60) / timer)} cpm={timer === 0 ? 0 : Math.round((cpm * 60) / timer)} Accuracy={accuracy} setReset={reset} onNextChapter={()=>{nextVerse();reset();}} scriptureData={response} />, document.getElementById('portal'))}
+            {end && createPortal(<ScriptureResultCard wpm={timer === 0 ? 0 : Math.round((wpm * 60) / timer)} cpm={timer === 0 ? 0 : Math.round((cpm * 60) / timer)} accuracy={accuracy} setReset={reset} onNextChapter={()=>{nextVerse();reset();}} scriptureData={response} />, document.getElementById('portal'))}
         </div>
     );
 }
