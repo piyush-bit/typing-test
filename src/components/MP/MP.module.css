@@ -1,0 +1,331 @@
+.container {
+    padding-top: 40px;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f6f6f7;
+}
+
+.container > p {
+    font-size: 16px;
+}
+
+.container > h2 {
+    font-size: 72px;
+}
+
+.controls {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.input {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: -1px 0px 29px -12px rgba(0,0,0,0.75);
+    transition: transform 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.statusContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.statusIndicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.button:disabled:hover {
+    transform: none;
+}
+
+.roomContainer {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: -1px 0px 29px -12px rgba(0,0,0,0.75);
+    margin-top: 30px;
+    min-width: 300px;
+}
+
+.userList {
+    margin: 20px 0;
+}
+
+.userItem {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f6f6f7;
+    border-radius: 5px;
+}
+
+h3 {
+    margin: 0;
+    color: #333;
+}
+
+h4 {
+    margin: 10px 0;
+    color: #666;
+}
+
+.currentUser {
+    border: 2px solid #4CAF50;
+    background-color: #f0f9f0;
+}
+
+.roomControls {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.startButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.startButton:hover {
+    background-color: #45a049;
+}
+
+.trafficLight {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Optional: Add a glow effect */
+.trafficLight[style*="F44336"] { /* Red */
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.5);
+}
+
+.trafficLight[style*="FFC107"] { /* Yellow */
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+}
+
+.trafficLight[style*="4CAF50"] { /* Green */
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.playersList {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping for multiple players */
+    max-width: 100%;
+}
+
+.playerCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid;
+    transition: all 0.2s ease;
+    min-width: 200px;
+    flex: 1;
+    max-width: calc(50% - 8px);
+}
+
+.playerInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progressWrapper {
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progressBar {
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.progressText {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    text-shadow: 0 0 2px white;
+}
+
+.playersLabel {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.roomInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    margin: 0 20px;
+}
+
+.roomIdBox {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #f6f6f7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-width: fit-content;
+}
+
+.roomLabel {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.roomValue {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.playersContainer {
+    display: flex;
+    flex-direction: column;
+} 
+
+
+.playersList {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping for multiple players */
+    width: 100%;
+}
+
+.playerCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid;
+    transition: all 0.2s ease;
+    min-width: 200px;
+    flex: 1;
+    max-width: calc(50% - 8px);
+}
+
+.playerInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 20px;
+}
+
+.progressWrapper {
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progressBar {
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.progressText {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    text-shadow: 0 0 2px white;
+}
+
+@media (max-width: 768px) {
+    .playerCard {
+        max-width: 100%;
+    }
+}
+
+.playersLabel {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.speed{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 20px;
+    height: 140px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: -1px 0px 29px -12px rgba(0,0,0,0.75);
+    overflow: hidden;
+}
+
+.gameContainer{
+    width: 100%;
+}

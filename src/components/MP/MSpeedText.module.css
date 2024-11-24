@@ -1,0 +1,61 @@
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: auto 0;
+    height: 100%;
+    align-items: center;
+
+}
+
+.container span{
+    font-size: 2rem;
+}
+.done,.comming{
+    flex-grow: 1;
+    display: flex;
+    gap: 1rem;
+    overflow-x: hidden;
+    position: relative;
+    user-select: none;
+}
+
+.done{
+    justify-content: right;
+    text-align: right;
+    color:#555454
+}
+.comming{
+    text-align: left;
+}
+.cursor{
+    position: absolute;
+    right: 0;
+    font-size: 2rem;
+    min-width: 2px;
+    opacity: 0.8;
+}
+.done-curr{
+    display: flex;
+    position: relative;
+}
+
+.wrong{
+    text-decoration: line-through;
+}
+.donecontainer .commingcotnainer {
+    position: relative;
+}
+
+.speed{
+    position: absolute;
+    top: 0px;
+    font-size: 8px;
+    display: flex;
+    gap: 0.5rem;
+}
+.dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+}
