@@ -27,6 +27,7 @@
 }
 .speed{
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
     max-width: 1024px;
