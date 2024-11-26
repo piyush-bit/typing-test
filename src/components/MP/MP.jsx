@@ -44,7 +44,7 @@ function MP() {
   }
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3000')
+    const newSocket = io(import.meta.env.VITE_API_URL)
 
     newSocket.on('connect', () => {
       setConnectionStatus('connected')
@@ -147,6 +147,7 @@ function MP() {
             creator={creator}
             text={gameState.text.split(' ')}
             countdown={gameState.countdown}
+            isStarted={gameState.isStarted}
             socket={socket}
           />
         </div>
