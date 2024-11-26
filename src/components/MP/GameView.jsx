@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styles from './MP.module.css'
 import MultipleSpeedText from './MultipleSpeedText'
 
-function GameView({ roomId, users, creator, text, countdown, socket , isStarted }) {
+function GameView({ roomId, users, creator, text, countdown, socket , isStarted , startTime , handleRestart }) {
   const [progress, setProgress] = useState({});
   const [levelmap,setLevelMap] = useState({});
   const [playerColors,SetPlayerColors] = useState({});
+  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
     if (!socket) return
@@ -40,6 +41,11 @@ function GameView({ roomId, users, creator, text, countdown, socket , isStarted 
     SetPlayerColors(randomColors);
   }, [users]);
 
+  useEffect(()=>{
+    setProgress({});
+    setCompleted(false);
+  },[text])
+
 
 
   const getCountdownColor = () => {
@@ -55,11 +61,24 @@ function GameView({ roomId, users, creator, text, countdown, socket , isStarted 
     }
   }
 
+  const getCountdownText = () => {
+    switch(countdown){
+      case 3:
+        return "Ready!"
+      case 2:
+        return "Get!"
+      case 1:
+        return "Set!"
+    }
+  }
+
   const currentUserId = socket?.id
 
   const incrementProgress = ()=>{
     socket.emit('game:progress', roomId)
   }
+
+  
 
   return (
     <div className={styles.gameContainer}>
@@ -117,12 +136,57 @@ function GameView({ roomId, users, creator, text, countdown, socket , isStarted 
                 className={styles.trafficLight}
                 style={{ backgroundColor: getCountdownColor() }}
                 />
+                <h2 className={styles.trafficLightText}>{getCountdownText()}</h2>
           </div>
         )}
       </div>
       {text && (
         <div className={styles.speed}>
-          <MultipleSpeedText incrementProgress={incrementProgress} playerColors={playerColors} text={text} levelmap={levelmap} isStarted={isStarted}/>
+          <MultipleSpeedText key={text} incrementProgress={incrementProgress} playerColors={playerColors} text={text} levelmap={levelmap} isStarted={isStarted} setCompleted={setCompleted}/>
+        </div>
+      )}
+      {completed && (
+        <div className={styles.leaderBoard}>
+          <div className={styles.leaderHeader}>
+            <h2>Game Complete!</h2> 
+            {socket?.id === creator && (
+              <button className={styles.restartButton} onClick={handleRestart}>Restart</button>
+            )}
+          </div>
+          <div className={styles.leaderBoardList}>
+            {Object.entries(progress)
+        .map(([id, value]) => ({
+            id: id, 
+            p: value.p, 
+            t: value.t
+        }))
+        .sort((a, b) => {
+            if (a.p !== b.p) return -a.p + b.p;
+            return a.t - b.t;
+        }).map((player, index) => (
+              <div 
+                key={player.id} 
+                className={`${styles.leaderBoardItem} ${player.id === socket?.id ? styles.currentPlayerCard : ''}`}
+                style={{ 
+                  borderColor: playerColors[player.id],
+                  backgroundColor: player.id === socket?.id 
+                    ? `${playerColors[player.id]}30`
+                    : `${playerColors[player.id]}10`
+                }}
+              >
+                <div className={styles.leaderBoardRank}>
+                  <span className={styles.rank}>#{index + 1}</span>
+                </div>
+                <div className={styles.leaderBoardDetails}>
+                  <span className={styles.playerName}>
+                    Player {users.indexOf(player.id) + 1}
+                    {player.id === socket?.id && ' (You)'}
+                  </span>
+                  <span className={styles.time}>{(player.p/((player.t-startTime) / 60000)).toFixed(2)} WPM</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

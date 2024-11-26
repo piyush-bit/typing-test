@@ -20,6 +20,9 @@ function MultipleSpeedText(props) {
         startTimeRef.current=new Date().getTime();
         if(index==text.length){
             setCompleted(true);
+            props.setCompleted(true);
+            
+            
             console.log("end");
             
         }

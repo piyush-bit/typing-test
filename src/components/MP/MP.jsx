@@ -14,7 +14,8 @@ function MP() {
   const [gameState, setGameState] = useState({
     isStarted: false,
     text: '',
-    countdown: null
+    countdown: null,
+    startTime : 0
   })
 
   const handleCreateRoom = () => {
@@ -111,7 +112,8 @@ function MP() {
       setGameState(prev => ({
         ...prev,
         isStarted: true,
-        countdown: null
+        countdown: null,
+        startTime: Date.now()
       }))
     })
 
@@ -148,7 +150,9 @@ function MP() {
             text={gameState.text.split(' ')}
             countdown={gameState.countdown}
             isStarted={gameState.isStarted}
+            startTime={gameState.startTime}
             socket={socket}
+            handleRestart={handleStartGame}
           />
         </div>
       )
