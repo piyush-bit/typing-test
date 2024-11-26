@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from './MP.module.css'
 import MultipleSpeedText from './MultipleSpeedText'
 
-function GameView({ roomId, users, creator, text, countdown, socket }) {
+function GameView({ roomId, users, creator, text, countdown, socket , isStarted }) {
   const [progress, setProgress] = useState({});
   const [levelmap,setLevelMap] = useState({});
   const [playerColors,SetPlayerColors] = useState({});
@@ -112,15 +112,17 @@ function GameView({ roomId, users, creator, text, countdown, socket }) {
           </div>
         </div>
         {countdown && (
-          <div 
-            className={styles.trafficLight}
-            style={{ backgroundColor: getCountdownColor() }}
-          />
+          <div className={styles.trafficLightContainer}>
+                <div 
+                className={styles.trafficLight}
+                style={{ backgroundColor: getCountdownColor() }}
+                />
+          </div>
         )}
       </div>
       {text && (
         <div className={styles.speed}>
-          <MultipleSpeedText incrementProgress={incrementProgress} playerColors={playerColors} text={text} levelmap={levelmap}/>
+          <MultipleSpeedText incrementProgress={incrementProgress} playerColors={playerColors} text={text} levelmap={levelmap} isStarted={isStarted}/>
         </div>
       )}
     </div>

@@ -10,9 +10,8 @@ function MultipleSpeedText(props) {
     const [done, setDone] = useState([]);
     const [correct, setCorrect] = useState([true]);
     const startTimeRef = useRef(null);
-    const lastChar = useRef(null);
     const [speed, setSpeed] = useState([]);
-    const [charSpeed, setCharSpeed] = useState({});
+    const [completed, setCompleted] = useState(false)
     const ref = useRef(null);
 
 
@@ -20,8 +19,7 @@ function MultipleSpeedText(props) {
         setComming([...text.slice(index)]);
         startTimeRef.current=new Date().getTime();
         if(index==text.length){
-            props.setEnd(true);
-            props.setStarted(false);
+            setCompleted(true);
             console.log("end");
             
         }
@@ -42,6 +40,10 @@ function MultipleSpeedText(props) {
     const onChangeHandler = (e) => {
         let input = e.target.textContent;
         let word = text[index];
+        if(!props.isStarted){
+            e.target.textContent = '';
+            return;
+        }
 
         // Use a regular expression to check for any whitespace character (including nbsp) at the beginning
         if (/^\s/.test(input)) {
@@ -129,7 +131,7 @@ function MultipleSpeedText(props) {
                         </div>
 
                 })}
-                <div className={styles.cursor} ref={ref} onKeyDown={onKeyDownHandler} onInput={onChangeHandler} contentEditable="true"></div>
+                <div className={styles.cursor} ref={ref} onKeyDown={onKeyDownHandler} onInput={onChangeHandler} contentEditable={!completed}></div>
             </div>
             <div className={styles.comming}>{comming.map((element, i) => { return <div className={styles.commingcotnainer}>
                 <span key={i}>{element}</span>
