@@ -31,6 +31,13 @@ function MultipleSpeedText(props) {
         
     }, [index])
 
+    useEffect(()=>{
+        if(props.isStarted){
+            ref.current.focus();
+        }
+
+    },[props.isStarted])
+
 
     const FocusChild = () => { ref.current.focus() };
 
