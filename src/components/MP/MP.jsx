@@ -45,19 +45,26 @@ function MP() {
   }
 
   useEffect(() => {
-    const newSocket = io(import.meta.env.VITE_API_URL)
+    const newSocket = io(import.meta.env.VITE_API_URL,{
+      transports: ["websocket"],  // ✅ here is where it matters
+      upgrade: false,             // optional: prevent fallback
+      withCredentials: false
+    })
 
     newSocket.on('connect', () => {
       setConnectionStatus('connected')
       console.log('Connected to server')
     })
 
-    newSocket.on('connect_error', () => {
+    newSocket.on('connect_error', (e) => {
+      console.log(e);
+      
       setConnectionStatus('failed')
       console.log('Failed to connect')
     })
 
-    newSocket.on('disconnect', () => {
+    newSocket.on('disconnect', (e) => {
+      console.log(e);
       setConnectionStatus('failed')
       console.log('Disconnected from server')
     })
